@@ -12,12 +12,14 @@
         <a href="/" class="inline-block text-4xl font-bold text-green-400 transition-colors hover:text-stone-800">Formy</a>
         <ul class="flex align-center items-center">
             <li><a href="/" class="font-medium text-xl transition-colors hover:text-green-500 mr-6">Home</a></li>
-            <li><a href="#" class="font-medium text-xl transition-colors hover:text-green-500 mr-8">Topics</a></li>
-            <li><a href="#" class="font-medium text-xl transition-colors hover:text-green-500 mr-6"><i class="fa-regular fa-message text-4xl"></i></a></li>
-            <li><a href="#" class="inline-block font-medium transition-colors hover:text-green-500 flex justify-center align-centers rounded-full w-14 h-14 border border-4 border-solid border-stone-800 hover:border-green-500 p-2"><i class="fa-solid fa-user text-2xl"></i></a></li>
+            <li><a href="#" class="font-medium text-xl transition-colors hover:text-green-500 mr-6">Topics</a></li>
+            <li><a href="#" class="mr-4 font-medium text-xl py-2 px-4 border border-solid border-2 border-green-500 transition-colors hover:text-white hover:bg-green-500 rounded-lg">Login</a></li>
+            <li><a href="{% url 'core:signup' %}" class="font-medium text-xl py-2 px-4 border border-solid border-2 border-green-500 transition-colors text-white hover:text-stone-800 bg-green-500 hover:bg-white rounded-lg">Sign up</a></li>
+            <!-- <li><a href="#" class="font-medium text-xl transition-colors hover:text-green-500 mr-6"><i class="fa-regular fa-message text-4xl"></i></a></li> -->
+            <!-- <li><a href="#" class="inline-block font-medium transition-colors hover:text-green-500 flex justify-center align-centers rounded-full w-14 h-14 border border-4 border-solid border-stone-800 hover:border-green-500 p-2"><i class="fa-solid fa-user text-2xl"></i></a></li> -->
         </ul>
     </nav>
-    <div class="">
+    <div class="w-full grid place-items-center">
         {% block content %}
         {% endblock %}
     </div>
