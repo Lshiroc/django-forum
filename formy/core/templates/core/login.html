@@ -1,15 +1,15 @@
 {% extends 'core/base.html' %}
 
-{% block title %}Sign up{% endblock %}
+{% block title %}Login{% endblock %}
 
 {% block content %}
 <div class="p-4 shadow-md hover:shadow-green-200 border border-2 border-solid border-gray-200 rounded-md transition-colors hover:border-green-500">
-    <h1 class="text-4xl font-bold mb-4">Sign up</h1>
+    <h1 class="text-4xl font-bold mb-4">Login</h1>
     <form method="POST" action="">
         {% csrf_token %}
 
         {{ form.as_p }}
-        <button type="submit" class="w-full mt-6 bg-green-400 p-2 text-xl text-white font-bold rounded-md">Sign up</button>
+        <button type="submit" class="w-full mt-6 bg-green-400 p-2 text-xl text-white font-bold rounded-md">Login</button>
     </form>
 </div>
 {% endblock %}
