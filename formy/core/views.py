@@ -26,6 +26,7 @@ def test(request):
     return render(request, 'core/follow_test.html')
 
 def followu2(request):
-    request.user.following.add(CustomUser.objects.get(id=2))
+    request.user.following.add(CustomUser.objects.get(id=3))
+    CustomUser.objects.get(id=3).followers.add(request.user)
 
     return redirect('core:test')
