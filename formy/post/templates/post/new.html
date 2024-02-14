@@ -12,13 +12,13 @@
 
         {{ form.as_p }}
 
-        <div class="w-full flex flex-wrap items-center px-2 mb-4 border border-solid border-2 border-gray-100 outline-green-400 text-lg rounded-md">
+        <div class="w-full flex flex-wrap items-center px-2 mb-4 border border-solid border-2 border-gray-100 outline-green-400 text-lg rounded-md hover:border-green-400">
             <span id="tagContainer" class="flex flex-wrap items-center gap-2"></span>
             <input type="text" id="tagInput" class="grow p-2 outline-none" />
             <!-- <input name="tags" id="hiddenfield" class="hidden"/> -->
         </div>
 
-        <button type="submit" id="submutBtn" class="w-full p-2 font-bold text-lg rounded-md bg-green-500 hover:bg-green-600 text-white">Create</button>
+        <button type="submit" id="submitBtn" class="w-full p-2 font-bold text-lg rounded-md bg-green-500 hover:bg-green-600 text-white">Create</button>
     </form>
 </div>
 {% endblock %}
