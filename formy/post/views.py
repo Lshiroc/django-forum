@@ -9,17 +9,22 @@ from .models import Tag
 def new(request):
     if request.method == 'POST':
         form = NewPostForm(request.POST)
-        form.instance.posted_by = request.user
         tags = json.loads(request.POST['tags'])['tags']
+        form.instance.posted_by = request.user
         tagsModels = []
         for tag in tags:
-            tag = Tag.objects.get_or_create(name=tag)
+            tag = Tag.objects.get_or_create(name=tag)[0]
             tagsModels.append(tag)
-        form.tags = tagsModels
 
         if form.is_valid():
-            form.save()
-            return redirect('/')
+            # form.save()
+            instance = form.save(commit=False)
+            # instance.posted_by = request.user
+            instance.save()
+            form.instance.tags.set(tagsModels)
+            # instance.save()
+            form.save_m2m()
+            # return redirect('/')
     else:
         form = NewPostForm()
 

@@ -5,7 +5,7 @@ from .models import Post, Tag
 class NewPostForm(forms.ModelForm):
     class Meta:
         model = Post
-        fields = ('title', 'context',)
+        fields = ('title', 'context', 'tags',)
 
     INPUT_CLASS = 'w-full mb-4 p-2 border border-solid border-2 border-gray-100 outline-green-400 text-lg rounded-md'
 
