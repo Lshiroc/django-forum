@@ -20,8 +20,7 @@ def new(request):
             instance = form.save(commit=False)
             instance.save()
             instance.tags.set(tagsModels)
-            # form.save_m2m()
-            # return redirect('/')
+            return redirect('/')
     else:
         form = NewPostForm()
 

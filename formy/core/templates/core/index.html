@@ -33,11 +33,14 @@
                             <div class="text-lg">{{ post.title }}</div>
                             <div class="">{{ post.posted_by }}</div>
                         </div>
-                        <div class="">
-                            <div class="text-sm">{{ post.created_at }}</div>
-                            {% for tag in post.tags.all %}
-                                <div class="text-sm">{{ tag }}</div>
-                            {% endfor %}
+                        <div class="additionalData">
+                            <!-- 
+                                Date is initially placed at .postTimeHidden, which will 
+                                be processed with moment.js in core/index.js to be shown
+                                in .postTime
+                             -->
+                            <div class="postTime text-sm">loading...</div>
+                            <div class="postTimeHidden hidden">{{ post.posted_at }}</div>
                         </div>
                     </div>
                 {% endfor %}

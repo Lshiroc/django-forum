@@ -52,5 +52,8 @@
     </footer>
 
     {% block script %}{% endblock %}
+    {% load static %}
+    <script src="{% static 'core/moment.js' %}"></script>
+    <script src="{% static 'core/index.js' %}"></script>
 </body>
 </html>
