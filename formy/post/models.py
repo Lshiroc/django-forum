@@ -13,10 +13,10 @@ class Post(models.Model):
     title = models.CharField(max_length=255)
     context = models.TextField()
     views = models.IntegerField(default=0)
-    posted_by = models.ForeignKey('accounts.CustomUser', on_delete=models.CASCADE)
+    posted_by = models.ForeignKey('accounts.CustomUser', related_name='all_posts', on_delete=models.CASCADE)
     posted_at = models.DateTimeField(auto_now_add=True)
     modified_at = models.DateTimeField(auto_now=True)
-    tags = models.ManyToManyField(Tag, symmetrical=True, blank=True)
+    tags = models.ManyToManyField(Tag)
 
     class Meta:
         ordering = ('posted_at', 'title', 'views',)

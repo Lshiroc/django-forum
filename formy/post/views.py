@@ -10,20 +10,17 @@ def new(request):
     if request.method == 'POST':
         form = NewPostForm(request.POST)
         tags = json.loads(request.POST['tags'])['tags']
-        form.instance.posted_by = request.user
         tagsModels = []
         for tag in tags:
             tag = Tag.objects.get_or_create(name=tag)[0]
             tagsModels.append(tag)
 
         if form.is_valid():
-            # form.save()
+            form.instance.posted_by = request.user
             instance = form.save(commit=False)
-            # instance.posted_by = request.user
             instance.save()
-            form.instance.tags.set(tagsModels)
-            # instance.save()
-            form.save_m2m()
+            instance.tags.set(tagsModels)
+            # form.save_m2m()
             # return redirect('/')
     else:
         form = NewPostForm()
