@@ -15,7 +15,7 @@ class Post(models.Model):
     views = models.IntegerField(default=0)
     posted_by = models.ForeignKey('accounts.CustomUser', related_name='all_posts', on_delete=models.CASCADE)
     posted_at = models.DateTimeField(auto_now_add=True)
-    modified_at = models.DateTimeField(auto_now=True)
+    modified_at = models.DateTimeField(auto_now_add=True)
     tags = models.ManyToManyField(Tag)
 
     class Meta:
