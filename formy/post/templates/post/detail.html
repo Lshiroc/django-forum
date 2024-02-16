@@ -19,9 +19,9 @@
         </div>
         <div class="main grid grid-cols-[auto_1fr] gap-4">
             <div class="updown grid justify-items-center text-stone-800">
-                <a href="#" class="inline-block text-5xl"><i class="fa-solid fa-fw fa-caret-up"></i></a>
-                <div class="text-xl font-bold">23</div>
-                <a href="#" class="inline-block text-5xl"><i class="fa-solid fa-fw fa-caret-down"></i></a>
+                <a href="{% url 'post:upvote' post.id %}" class="inline-block text-5xl"><i class="fa-solid fa-fw fa-caret-up"></i></a>
+                <div class="text-xl font-bold">{{ score }}</div>
+                <a href="{% url 'post:downvote' post.id %}" class="inline-block text-5xl"><i class="fa-solid fa-fw fa-caret-down"></i></a>
             </div>
             <div class="content">
                 <p class="mb-6 text-stone-800">{{ post.context }}</p>

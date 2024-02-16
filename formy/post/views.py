@@ -5,13 +5,39 @@ import json
 from .forms import NewPostForm
 from .models import Post, Tag
 
+@login_required
+def upvote(request, pk):
+    post = get_object_or_404(Post, pk=pk)
+    if post in request.user.upvoted_posts.all():
+        post.upvote.remove(request.user)
+    else:
+        if post in request.user.downvoted_posts.all():
+            post.downvote.remove(request.user)
+        post.upvote.add(request.user)
+
+    return redirect('post:detail', pk)
+
+@login_required
+def downvote(request, pk):
+    post = get_object_or_404(Post, pk=pk)
+    if post in request.user.downvoted_posts.all():
+        post.downvote.remove(request.user)
+    else:
+        if post in request.user.upvoted_posts.all():
+            post.upvote.remove(request.user)
+        post.downvote.add(request.user)
+
+    return redirect('post:detail', pk)
+
 def detail(request, pk):
     post = get_object_or_404(Post, pk=pk)
     post.views += 1
     post.save()
+    score = post.upvote.count() - post.downvote.count()
 
     return render(request, 'post/detail.html', {
         'post': post,
+        'score': score,
     })
 
 @login_required

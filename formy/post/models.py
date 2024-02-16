@@ -13,6 +13,8 @@ class Post(models.Model):
     title = models.CharField(max_length=255)
     context = models.TextField()
     views = models.IntegerField(default=0)
+    upvote = models.ManyToManyField('accounts.CustomUser', symmetrical=False, related_name='upvoted_posts')
+    downvote = models.ManyToManyField('accounts.CustomUser', symmetrical=False, related_name='downvoted_posts')
     posted_by = models.ForeignKey('accounts.CustomUser', related_name='all_posts', on_delete=models.CASCADE)
     posted_at = models.DateTimeField(auto_now_add=True)
     modified_at = models.DateTimeField(auto_now_add=True)
