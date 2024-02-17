@@ -28,6 +28,9 @@ class Post(models.Model):
 
 class Comment(models.Model):
     context = models.TextField()
+    upvotes = models.ManyToManyField('accounts.CustomUser', symmetrical=False, related_name='upvoted_comments')
+    downvotes = models.ManyToManyField('accounts.CustomUser', symmetrical=False, related_name='downvoted_comments')
+    score = models.IntegerField(default=0)
     posted_by = models.ForeignKey('accounts.CustomUser', related_name='user_comments', on_delete=models.CASCADE)
     post = models.ForeignKey(Post, related_name='all_comments', on_delete=models.CASCADE)
 
@@ -36,3 +39,7 @@ class Comment(models.Model):
     
     def __str__(self):
         return self.context
+    
+    def save(self, *args, **kwargs):
+        self.score = self.upvotes.count() - self.downvotes.count()
+        super().save(*args, **kwargs)

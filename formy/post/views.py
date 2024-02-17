@@ -3,10 +3,10 @@ from django.contrib.auth.decorators import login_required
 import json
 
 from .forms import NewPostForm, NewComment
-from .models import Post, Tag
+from .models import Post, Tag, Comment
 
 @login_required
-def upvote(request, pk):
+def upvote_post(request, pk):
     post = get_object_or_404(Post, pk=pk)
     if post in request.user.upvoted_posts.all():
         post.upvote.remove(request.user)
@@ -18,7 +18,7 @@ def upvote(request, pk):
     return redirect('post:detail', pk)
 
 @login_required
-def downvote(request, pk):
+def downvote_post(request, pk):
     post = get_object_or_404(Post, pk=pk)
     if post in request.user.downvoted_posts.all():
         post.downvote.remove(request.user)
@@ -28,6 +28,32 @@ def downvote(request, pk):
         post.downvote.add(request.user)
 
     return redirect('post:detail', pk)
+
+@login_required
+def upvote_comment(request, postid, commentid):
+    comment = get_object_or_404(Comment, pk=commentid)
+    if comment in request.user.upvoted_comments.all():
+        comment.upvotes.remove(request.user)
+    else:
+        if comment in request.user.downvoted_comments.all():
+            comment.downvotes.remove(request.user)
+        comment.upvotes.add(request.user)
+    comment.save()
+
+    return redirect('post:detail', postid)  
+
+@login_required
+def downvote_comment(request, postid, commentid):
+    comment = get_object_or_404(Comment, pk=commentid)
+    if comment in request.user.downvoted_comments.all():
+        comment.downvotes.remove(request.user)
+    else:
+        if comment in request.user.upvoted_comments.all():
+            comment.upvotes.remove(request.user)
+        comment.downvotes.add(request.user)
+    comment.save()
+
+    return redirect('post:detail', postid)
 
 def detail(request, pk):
     post = get_object_or_404(Post, pk=pk)
