@@ -5,4 +5,8 @@ $(function() {
         let longAgo = moment.utc(date, "MMM. DD, YYYY, h:mm a").local().fromNow();
         $(this).closest('.additionalData').find('.postTime').text(longAgo)
     })
-})
+
+    $('#profile').on('click', function() {
+        $('#profileContext').toggle();
+    })
+});
