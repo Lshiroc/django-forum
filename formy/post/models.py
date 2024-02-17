@@ -26,3 +26,13 @@ class Post(models.Model):
     def __str__(self):
         return self.title
 
+class Comment(models.Model):
+    context = models.TextField()
+    posted_by = models.ForeignKey('accounts.CustomUser', related_name='user_comments', on_delete=models.CASCADE)
+    post = models.ForeignKey(Post, related_name='all_comments', on_delete=models.CASCADE)
+
+    class Meta:
+        ordering = ('context',)
+    
+    def __str__(self):
+        return self.context

@@ -2,7 +2,7 @@ from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.decorators import login_required
 import json
 
-from .forms import NewPostForm
+from .forms import NewPostForm, NewComment
 from .models import Post, Tag
 
 @login_required
@@ -35,9 +35,20 @@ def detail(request, pk):
     post.save()
     score = post.upvote.count() - post.downvote.count()
 
+    if request.method == 'POST':
+        form = NewComment(request.POST)
+        if form.is_valid():
+            form.instance.posted_by = request.user
+            form.instance.post = post
+            form.save()
+            return redirect('post:detail', pk)
+    else:
+        form = NewComment()
+
     return render(request, 'post/detail.html', {
         'post': post,
         'score': score,
+        'form': form,
     })
 
 @login_required

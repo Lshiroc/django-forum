@@ -34,6 +34,28 @@
                 </div>
             </div>
         </div>
+        <div class="comments">
+            {% for comment in post.all_comments.all %}
+            <div class="main grid grid-cols-[auto_1fr] gap-4 border-t-2">
+                <div class="updown grid justify-items-center text-stone-800">
+                    <a href="{% url 'post:upvote' post.id %}" class="inline-block text-5xl"><i class="fa-solid fa-fw fa-caret-up"></i></a>
+                    <div class="text-xl font-bold">{{ score }}</div>
+                    <a href="{% url 'post:downvote' post.id %}" class="inline-block text-5xl"><i class="fa-solid fa-fw fa-caret-down"></i></a>
+                </div>
+                <div class="content">
+                    <p class="mb-6 text-stone-800">{{ comment.context }}</p>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+        {% if request.user.is_authenticated %}
+        <form method="POST" action="">
+            {% csrf_token %}
+
+            {{ form.as_p }}
+            <button type="submit" class="w-full bg-green-400 text-2xl p-2 font-medium text-white rounded-md">Send</button>
+        </form>
+        {% endif %}
     </div>
 </div>
 {% endblock %}
