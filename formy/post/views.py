@@ -64,9 +64,12 @@ def detail(request, pk):
     if request.method == 'POST':
         form = NewComment(request.POST)
         if form.is_valid():
-            form.instance.posted_by = request.user
-            form.instance.post = post
-            form.save()
+            comment = form.save(commit=False)
+            comment.posted_by = request.user
+            comment.post = post
+            print(comment.context)
+            comment.save()
+
             return redirect('post:detail', pk)
     else:
         form = NewComment()

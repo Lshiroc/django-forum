@@ -2,6 +2,10 @@
 
 {% block title %}{{ post.title }}{% endblock %}
 
+{% block editorLink %}
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/simplemde/latest/simplemde.min.css">
+{% endblock %}
+
 {% block content %}
 <div class="w-full h-full p-4 flex gap-10">
     {% include 'core/sidebar.html' %}
@@ -24,7 +28,7 @@
                 <a href="{% url 'post:downvote_post' post.id %}" class="inline-block text-5xl"><i class="fa-solid fa-fw fa-caret-down"></i></a>
             </div>
             <div class="content">
-                <p class="mb-6 text-stone-800">{{ post.context }}</p>
+                <div class="parse mb-6 text-stone-800" data-content="{{ post.context }}">{{ post.context }}</div>
                 <div class="">
                     <div class="">
                         {% for tag in post.tags.all %}
@@ -43,7 +47,17 @@
                     <a href="{% url 'post:downvote_comment' post.id comment.id %}" class="inline-block text-5xl"><i class="fa-solid fa-fw fa-caret-down"></i></a>
                 </div>
                 <div class="content">
-                    <p class="mb-6 text-stone-800">{{ comment.context }}</p>
+                    <div class="parse mb-6 text-stone-800" data-content="{{ comment.context }}">{{ comment.context }}</div>
+                </div>
+            </div>
+            <div class="main grid grid-cols-[auto_1fr] gap-4 border-t-2">
+                <div class="updown grid justify-items-center text-stone-800">
+                    <a href="{% url 'post:upvote_comment' post.id comment.id %}" class="inline-block text-5xl"><i class="fa-solid fa-fw fa-caret-up"></i></a>
+                    <div class="text-xl font-bold">1</div>
+                    <a href="{% url 'post:downvote_comment' post.id comment.id %}" class="inline-block text-5xl"><i class="fa-solid fa-fw fa-caret-down"></i></a>
+                </div>
+                <div class="content">
+                    <div class="parse mb-6 text-stone-800" data-content="{{ comment.context }}"># Hello\n\n** this is my first markdown comment here **</div>
                 </div>
             </div>
             {% endfor %}
@@ -52,10 +66,24 @@
         <form method="POST" action="">
             {% csrf_token %}
 
-            {{ form.as_p }}
+            <div class="mb-3">
+                <textarea name="context" id="textEditor"></textarea>
+            </div>
             <button type="submit" class="w-full bg-green-400 text-2xl p-2 font-medium text-white rounded-md">Send</button>
         </form>
         {% endif %}
     </div>
 </div>
 {% endblock %}
+
+{% block editorScript %}
+    <script src="https://cdn.jsdelivr.net/simplemde/latest/simplemde.min.js"></script>
+{% endblock %}
+{% block markedjs %}
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/marked/12.0.0/marked.min.js" integrity="sha512-tjg8I2d6Fi0OBGz1csmr7RfI4uupYaCfL/RqhVRTS42RMGwfBsjwBGmhzhI+e2dPmyew8cFkoxnVkGvADDLvbg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+{% endblock %}
+{% block script %}
+    {% load static %}
+    <script src="{% static 'post/detail.js' %}"></script>
+{% endblock %}
+

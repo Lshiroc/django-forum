@@ -1,5 +1,6 @@
 let tagContainer = $("#tagContainer");
 let tags = [];
+let simplemde = new SimpleMDE({ element: $('#contextEditor')[0] })
 
 $(function() {
     $('#tagInput').on('keydown', function(e) {

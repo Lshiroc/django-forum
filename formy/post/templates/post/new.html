@@ -2,15 +2,26 @@
 
 {% block title %}New Post{% endblock %}
 
-{% block content %}
+{% block editorLink %}
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/simplemde/latest/simplemde.min.css">
+{% endblock %}
 
+{% block content %}
 <div class="px-4 py-6 w-full h-full text-stone-800">
     <h1 class="font-bold text-3xl">New Post</h1>
 
     <form id="form" method="POST" action="">
         {% csrf_token %}
 
-        {{ form.as_p }}
+        <div class="mb-3">
+            <label for="title">Title:</label>
+            {{ form.title }}
+        </div>
+
+        <div class="mb-3">
+            <label>Context:</label>
+            <textarea name="context" id="contextEditor">dasds</textarea>
+        </div>
 
         <div class="w-full flex flex-wrap items-center px-2 mb-4 border border-solid border-2 border-gray-100 outline-green-400 text-lg rounded-md hover:border-green-400">
             <span id="tagContainer" class="flex flex-wrap items-center gap-2"></span>
@@ -23,6 +34,9 @@
 </div>
 {% endblock %}
 
+{% block editorScript %}
+<script src="https://cdn.jsdelivr.net/simplemde/latest/simplemde.min.js"></script>
+{% endblock %}
 {% block script %}
     {% load static %}
     <script src="{% static 'post/new_post.js' %}"></script>
