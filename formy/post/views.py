@@ -67,7 +67,6 @@ def detail(request, pk):
             comment = form.save(commit=False)
             comment.posted_by = request.user
             comment.post = post
-            print(comment.context)
             comment.save()
 
             return redirect('post:detail', pk)

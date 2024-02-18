@@ -28,7 +28,7 @@
                 <a href="{% url 'post:downvote_post' post.id %}" class="inline-block text-5xl"><i class="fa-solid fa-fw fa-caret-down"></i></a>
             </div>
             <div class="content">
-                <div class="parse mb-6 text-stone-800" data-content="{{ post.context }}">{{ post.context }}</div>
+                <!-- <div class="parse mb-6 text-stone-800" data-content="{{ post.context }}">{{ post.context }}</div> -->
                 <div class="">
                     <div class="">
                         {% for tag in post.tags.all %}
@@ -69,7 +69,7 @@
             <div class="mb-3">
                 <textarea name="context" id="textEditor"></textarea>
             </div>
-            <button type="submit" class="w-full bg-green-400 text-2xl p-2 font-medium text-white rounded-md">Send</button>
+            <button type="button" id="submitBtn" class="w-full bg-green-400 text-2xl p-2 font-medium text-white rounded-md">Send</button>
         </form>
         {% endif %}
     </div>
