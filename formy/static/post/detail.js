@@ -1,9 +1,13 @@
 $(function() {
     let simplemde = new SimpleMDE({ element: $("#textEditor")[0] })
+    marked.setOptions({
+        breaks: true,
+        gfm: true,
+    })
 
     $('.parse').each(function() {
         console.log("parsed")
-        $(this).html(marked.parse(JSON.parse($(this).attr("data-content")).context))
+        $(this).html(marked.parse(JSON.parse($(this).attr("data-content")).context).replaceAll(/\r\n|\r|\n/g, '<br />'))
     })
 
     $('#submitBtn').on('click', function() {

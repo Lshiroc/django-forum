@@ -65,7 +65,6 @@
         {% if request.user.is_authenticated %}
         <form method="POST" action="">
             {% csrf_token %}
-
             <div class="mb-3">
                 <textarea name="context" id="textEditor"></textarea>
             </div>
