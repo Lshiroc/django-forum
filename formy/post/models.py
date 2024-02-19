@@ -28,8 +28,8 @@ class Post(models.Model):
 
 class Comment(models.Model):
     context = models.TextField()
-    upvotes = models.ManyToManyField('accounts.CustomUser', symmetrical=False, blank=True, null=True, related_name='upvoted_comments')
-    downvotes = models.ManyToManyField('accounts.CustomUser', symmetrical=False, blank=True, null=True, related_name='downvoted_comments')
+    upvotes = models.ManyToManyField('accounts.CustomUser', symmetrical=False, related_name='upvoted_comments')
+    downvotes = models.ManyToManyField('accounts.CustomUser', symmetrical=False, related_name='downvoted_comments')
     score = models.IntegerField(default=0)
     posted_by = models.ForeignKey('accounts.CustomUser', related_name='user_comments', on_delete=models.CASCADE)
     post = models.ForeignKey(Post, related_name='all_comments', on_delete=models.CASCADE)

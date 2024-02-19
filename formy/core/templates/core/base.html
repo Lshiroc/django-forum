@@ -11,22 +11,22 @@
     <style type="text/tailwindcss">
         @layer base {
           h1 {
-            @apply text-4xl
-          }
-          h2 {
             @apply text-3xl
           }
-          h3 {
+          h2 {
             @apply text-2xl
           }
-          h4 {
+          h3 {
             @apply text-xl
           }
-          h5 {
+          h4 {
             @apply text-lg
           }
-          h6 {
+          h5 {
             @apply text-base
+          }
+          h6 {
+            @apply text-sm
           }
         }
       </style>
@@ -42,7 +42,7 @@
             <li><a href="{% url 'post:new' %}" class="font-medium text-xl transition-colors hover:text-green-500 mr-6">+ New Post</a></li>
             <li id="profile" class="relative"><a href="#" class="inline-block font-medium transition-colors hover:text-green-500 flex justify-center align-centers rounded-full w-12 h-12 border border-4 border-solid border-stone-800 hover:border-green-500 p-2"><i class="fa-solid fa-user text-xl"></i></a>
                 <ul id="profileContext" class="hidden w-40 mt-2 bg-white absolute right-0 shadow-md rounded-sm border">
-                    <li><a href="#" class="block hover:bg-gray-100 py-2 pl-2 pr-6">User Profile</a></li>
+                    <li><a href="{% url 'user:profile' %}" class="block hover:bg-gray-100 py-2 pl-2 pr-6">User Profile</a></li>
                     <li><a href="#" class="block hover:bg-gray-100 py-2 pl-2 pr-6">Settings</a></li>
                     <li><a href="#" class="block hover:bg-gray-100 py-2 pl-2 pr-6">Posts</a></li>
                 </ul>

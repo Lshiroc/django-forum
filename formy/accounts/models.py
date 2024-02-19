@@ -5,9 +5,10 @@ from post.models import Post
 
 class CustomUser(AbstractUser):
     pass
-    followers = models.ManyToManyField('self', symmetrical=False, related_name="followed_by", blank=True, null=True)
-    following = models.ManyToManyField('self', symmetrical=False, blank=True, null=True)
-    posts = models.ManyToManyField(Post, symmetrical=False, blank=True, null=True)
+    followers = models.ManyToManyField('self', symmetrical=False, related_name="followed_by")
+    following = models.ManyToManyField('self', symmetrical=False)
+    posts = models.ManyToManyField(Post, symmetrical=False)
+    profile_picture = models.ImageField(blank=True, null=True)
 
     def __str__(self):
         return self.username
