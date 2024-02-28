@@ -2,21 +2,27 @@
 
 {% block title %}{{ request.user }}'s Profile{% endblock %}
 
+{% block stylesheet %}
+	{% load static %}
+	<link rel="stylesheet" href="{% static 'accounts/jquery.guillotine.css' %}" />
+{% endblock %}
+
 {% block content %}
 
 <div class="w-full h-full p-4 flex gap-10">
     {% include 'core/sidebar.html' %}
     <div id="test" class="w-full relative grid">
-        <div class="z-10 select-none absolute self-center justify-self-center p-2 rounded-md bg-gray-200 w-1/2 h-96 overflow-hidden">
-            <img id="profilePicturePreview" alt="Profile Picture" style="user-drag: none; -webkit-user-drag: none;" />
-            <div id="draggerSquare" class="absolute top-0 left-0 w-40 h-40 border border-solid border-2 border-purple-600 grid items-end justify-end cursor-move">
-                <div class="flex relative -bottom-8">
-                    <div id="imageZoomIn" class="text-lg border-2 border-stone-400 cursor-pointer"><i class="fa-solid fa-fw fa-magnifying-glass-plus"></i></div>
-                    <div id="imageZoomOut" class="text-lg border-2 border-stone-400 cursor-pointer"><i class="fa-solid fa-fw fa-magnifying-glass-minus"></i></div>
-                </div>
-            </div>
+        <div class="z-10 select-none absolute self-center justify-self-center p-2 rounded-md bg-gray-200 w-1/3">
+			<div class="w-full">
+				<img id="profilePicturePreview" alt="Profile Picture" class="relative" style="user-drag: none; -webkit-user-drag: none;" />
+			</div>
+			<div class="mt-2 w-full flex gap-2 justify-center">
+				<div id="zoomIn" class="px-4 py-2 bg-gray-100 cursor-pointer"><i class="fa-solid fa-fx fa-magnifying-glass-plus"></i></div>
+				<div id="zoomOut" class="px-4 py-2 bg-gray-100 cursor-pointer"><i class="fa-solid fa-fx fa-magnifying-glass-minus"></i></div>
+				<div id="saveImg" class="px-4 py-2 bg-gray-100 cursor-pointer"><i class="fa-solid fa-fx fa-floppy-disk"></i></div>
+			</div>
         </div>
-        <div class="h-40 bg-gray-100 grid grid-cols-2">
+        <div id="test" class="h-40 bg-gray-100 grid grid-cols-2">	
             <div class="self-end flex relative -bottom-10 left-10">
                 <div id="profileImage" class="relative w-24 h-24 bg-gray-200">
                     <form id="editHoverForm" method="POST" action="" enctype="multipart/form-data" class="hidden absolute inset-0 bg-gray-400 opacity-70">
@@ -43,5 +49,6 @@
 {% block script %}
     {% load static %}
     <script src="{% static 'accounts/user_profile.js' %}"></script>
+	<script src="{% static 'accounts/jquery.guillotine.js' %}"></script>
 {% endblock %}
 

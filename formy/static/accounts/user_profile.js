@@ -11,49 +11,35 @@ $(function() {
         console.log("changed", e.target.files.length);
         if(e.target.files.length) {
             let src = URL.createObjectURL(e.target.files[0]);
-            $('#profilePicturePreview').attr('src', src);
+			let pic = $('#profilePicturePreview');
+			$('#profilePicturePreview').attr('src', src);
+			$('#profilePicturePreview').on('load', function() {
+				pic.guillotine({width: 300, height: 300});
+				$('#zoomIn').click(function() {
+					pic.guillotine('zoomIn');
+				});
+				$('#zoomOut').click(function() {
+					pic.guillotine('zoomOut');
+				});
+			
+				// Crop the image based on data gotten from guillotine
+				$('#saveImg').on('click', function() {
+					let data = pic.guillotine('getData');
+					let canvas = document.createElement('canvas');
+					let ctx = canvas.getContext('2d');
+					
+					canvas.width = data.w * data.scale;
+					canvas.height = data.h * data.scale;
+					ctx.drawImage(pic[0], data.x, data.y, data.w, data.h, 0, 0, data.w*data.scale, data.h*data.scale);
+					let croppedImg = new Image();
+					croppedImg.src = canvas.toDataURL();
+					$('#test').append(croppedImg);
+				});
+			});
             
             // $('#editHoverForm').submit();
         } else {
             console.log("empty huh...")
         }
     })
-
-    function handle_mousedown(e) {
-        window.my_dragging = {};
-        my_dragging.pageX0 = e.pageX;
-        my_dragging.pageY0 = e.pageY;
-        my_dragging.elem = this;
-        my_dragging.offset0 = $(this).offset();
-        console.log("ehm1");
-
-        function handle_dragging(e) {
-            let left = my_dragging.offset0.left + (e.pageX - my_dragging.pageX0);
-            let top = my_dragging.offset0.top + (e.pageY - my_dragging.pageY0);
-            $(my_dragging.elem).offset({top: top, left: left});
-        }
-
-        function handle_mouseup(e) {
-            $('body')
-            .off('mousemove', handle_dragging)
-            .off('mouseup', handle_mouseup);
-        }
-
-        $('body')
-        .on('mouseup', handle_mouseup)
-        .on('mousemove', handle_dragging);
-    }
-
-    $('#draggerSquare').mousedown(handle_mousedown)
-    $('#profilePicturePreview').mousedown(handle_mousedown)
-
-    $('#imageZoomIn').on(function() {
-        console.log("well")
-        $('#profilePicturePreview').css('transform', 'scale(1.2)');
-    })
-    
-    $('#imageZoomOut').on(function() {
-        $('#profilePicturePreview').css('transform', 'scale(0.8)');
-    })
-
 })
