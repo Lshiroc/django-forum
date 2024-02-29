@@ -22,14 +22,15 @@
 				<div id="saveImg" class="px-4 py-2 bg-gray-100 cursor-pointer"><i class="fa-solid fa-fx fa-floppy-disk"></i></div>
 			</div>
         </div>
-        <div id="test" class="h-40 bg-gray-100 grid grid-cols-2">	
+        <div id="test" class="h-40 bg-gray-100 grid grid-cols-2">
             <div class="self-end flex relative -bottom-10 left-10">
                 <div id="profileImage" class="relative w-24 h-24 bg-gray-200">
                     <form id="editHoverForm" method="POST" action="" enctype="multipart/form-data" class="hidden absolute inset-0 bg-gray-400 opacity-70">
                         {% csrf_token %}
                         <div class="relative w-full flex justify-center items-center">
-                            <input id="fileSelect" type="file" name="profile_picture" accept="image/png, image/jpg, image/jpeg" class="absolute inset-0 opacity-0 cursor-pointer" />
-                            <i class="text-2xl fa-solid fa-pen-to-square"></i>
+                            <input id="fileSelect" type="file" name="profile_picture_full" accept="image/png, image/jpg, image/jpeg" class="absolute inset-0 opacity-0 cursor-pointer" />
+							<input id="cropDetails" type="text" name="crop_details" class="hidden" />
+							<i class="text-2xl fa-solid fa-pen-to-square"></i>
                         </div>
                     </form>
                 </div>
