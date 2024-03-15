@@ -12,6 +12,7 @@ class NewPostForm(forms.ModelForm):
 
     title = forms.CharField(widget=forms.TextInput(attrs={
         'class': INPUT_CLASS,
+        'id': 'titleInput',
         'placeholder': 'Post title'
     }))
     context = forms.CharField(widget=forms.Textarea(attrs={

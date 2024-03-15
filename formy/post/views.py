@@ -82,14 +82,16 @@ def detail(request, pk):
 @login_required
 def new(request):
     if request.method == 'POST':
+        print(request.POST['tags'])
         form = NewPostForm(request.POST)
         tags = json.loads(request.POST['tags'])['tags']
         tagsModels = []
         for tag in tags:
             tag = Tag.objects.get_or_create(name=tag)[0]
             tagsModels.append(tag)
-
+            print("in for")
         if form.is_valid():
+            print("form is valid`")
             form.instance.posted_by = request.user
             instance = form.save(commit=False)
             instance.save()
